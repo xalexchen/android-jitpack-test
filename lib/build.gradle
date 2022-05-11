@@ -38,12 +38,21 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+
+                groupId = 'dev.alex.jitpack.lib'
+                artifactId = 'debug'
+                version = '1.0'
+            }
             // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.release
                 groupId = 'dev.alex.jitpack.lib'
-                artifactId = 'android-example'
-                version = '1.0'
+                artifactId = 'release'
+                version = '1.1'
             }
         }
     }
