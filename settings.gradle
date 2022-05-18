@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "android-jitpack-test"
 include ':app'
-include ':lib'
+//include ':lib'
 include ':nativelib'

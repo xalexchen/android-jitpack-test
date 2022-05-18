@@ -58,13 +58,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+def groupName = 'custom'
+
 task beforeBuildSDK {
+    setGroup(groupName)
     doFirst {
         println("beforeBuildSDK!!!")
     }
 }
 
 task afterBuildSDK {
+    setGroup(groupName)
     doFirst {
         println("afterBuildSDK!!!")
     }
@@ -82,23 +86,16 @@ afterEvaluate {
     def afterBuildSDK = project.tasks.findByName("afterBuildSDK")
     aR.dependsOn(buildSDK)
     afterBuildSDK.dependsOn(aR)
+
+
     publishing {
         publications {
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
-
-                groupId = 'dev.alex.jitpack.nativelib'
-                artifactId = 'debug'
-                version = '1.0'
-            }
             // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.release
                 groupId = 'dev.alex.jitpack.nativelib'
                 artifactId = 'release'
-                version = '1.1'
+                version = '1.3'
             }
         }
 
