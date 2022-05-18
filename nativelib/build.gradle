@@ -57,7 +57,31 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
+
+task beforeBuildSDK {
+    doFirst {
+        println("beforeBuildSDK!!!")
+    }
+}
+
+task afterBuildSDK {
+    doFirst {
+        println("afterBuildSDK!!!")
+    }
+}
+
 afterEvaluate {
+    android.libraryVariants.forEach { variant ->
+        def buildTypeName = variant.buildType.name
+        if (buildTypeName != 'release') return
+
+        print(buildTypeName)
+    }
+    def aR = project.tasks.findByName("assembleRelease")
+    def buildSDK = project.tasks.findByName("beforeBuildSDK")
+    def afterBuildSDK = project.tasks.findByName("afterBuildSDK")
+    aR.dependsOn(buildSDK)
+    afterBuildSDK.dependsOn(aR)
     publishing {
         publications {
             // Creates a Maven publication called “debug”.
@@ -85,4 +109,11 @@ afterEvaluate {
             }
         }
     }
+}
+
+tasks.register('generateRepo', Zip) {
+    def publishTask = tasks.named('publishReleasePublicationToMyrepoRepository')
+    from publishTask.map { it.getRepository().getUrl() }
+    into 'mylibrary'
+    archiveFileName.set('mylibrary.zip')
 }

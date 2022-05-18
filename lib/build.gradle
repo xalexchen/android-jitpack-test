@@ -36,7 +36,7 @@ dependencies {
 }
 
 afterEvaluate {
-    publishing {
+/*    publishing {
         publications {
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {
@@ -62,5 +62,5 @@ afterEvaluate {
                 url = "${project.buildDir}/repo"
             }
         }
-    }
+    }*/
 }
