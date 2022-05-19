@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+-optimizationpasses 5
+-allowaccessmodification
+-dontskipnonpubliclibraryclassmembers
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-useuniqueclassmembernames
+-keepattributes SourceFile,LineNumberTable,Signature,InnerClasses,Exceptions
+-renamesourcefileattribute SourceFile
+-keepparameternames
+-ignorewarnings
+-classobfuscationdictionary proguard.txt
+
+-keep class dev.alex.jitpack.nativelib.API { public *; }
+-keep class dev.alex.jitpack.nativelib.NativeLib { public *; }

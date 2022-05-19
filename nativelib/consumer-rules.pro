@@ -1,0 +1,1 @@
+-keep class dev.alex.jitpack.nativelib.NativeLib { public *; }

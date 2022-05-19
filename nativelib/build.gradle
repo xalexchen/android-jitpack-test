@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'maven-publish'
+    id 'com.guardsquare.proguard'
 }
 
 android {
@@ -49,9 +50,19 @@ android {
     }
 }
 
+proguard {
+    configurations {
+        release {
+            defaultConfiguration 'proguard-android-optimize.txt'
+            configuration 'proguard-rules.pro'
+        }
+    }
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.google.android.material:material:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
